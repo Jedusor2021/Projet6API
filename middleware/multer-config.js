@@ -7,16 +7,16 @@ const MINE_TYPES = {
     'image/png': 'png' 
 };
 
-const storage = multer.diskStorage ({
+const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, 'images')
+        callback(null, 'images');
     },
     filename: (req, file, callback) => {
-        const name = file.originalname.split('').join('_');
+        const name = file.originalname.split(' ').join('_');
         const extension = MINE_TYPES[file.minetype];
-        callback(null, name+ Date.now() + '.' + extension);
+        callback(null, name + Date.now() + '.' + extension);
     }
 
 });
 
-module.exports = multer({ storage}).single('image');
+module.exports = multer({storage: storage}).single('image');
